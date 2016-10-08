@@ -19,7 +19,7 @@ sleep(1)
 until game.finished?
   # Do this each round until the game is finished.
 
-  # Move each player forward.
+# Move each player forward.
   game.players.each do |player|
     game.advance_player(player)
   end
@@ -33,4 +33,8 @@ until game.finished?
 end
 
 # Once the game is finished, report the winner.
-puts "Player '#{game.winner}' wins!"
+if game.winner
+  puts "Player '#{game.winner}' wins!"
+else
+  puts "It's a tie!"
+end
