@@ -2,6 +2,9 @@ class RubyRacer
   attr_reader :players, :die, :length
 
   def initialize(players, die, length = 30)
+    @players = players
+    @die = die
+    @length = length
   end
 
   # Returns +true+ if one of the players has reached
@@ -21,5 +24,9 @@ class RubyRacer
   # that can be printed on the command line.
   # The board should have the same dimensions each time.
   def board_visualization
+    board = Array.new(@players.length) { Array.new(@length, "") }
+    board.map do |row|
+      row.join(" | ")
+    end
   end
 end
