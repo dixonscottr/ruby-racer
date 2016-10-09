@@ -9,13 +9,18 @@ puts "How many racers would like to compete?"
 num_of_players = gets.to_i
 
 game = RubyRacer.new(num_of_players, die, 30)
+
 num = 1
 player_symbols= []
 
 num_of_players.times do 
   puts "Please enter the symbol for player #{num}"
-  player_num = gets.chomp.to_sym
-  player_symbols << player_num
+  player_sym = gets.chomp.to_sym
+  until player_sym.length == 1
+    puts "Please only enter a 1-character-long symbol for player #{num}"
+    player_sym = gets.chomp.to_sym
+  end
+  player_symbols << player_sym
   num += 1
 end
 
