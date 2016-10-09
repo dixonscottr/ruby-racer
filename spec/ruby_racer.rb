@@ -2,11 +2,12 @@ require_relative '../ruby_racer'
 require_relative '../die'
 
 describe RubyRacer do
-  let(:die) { Die.new }
-  let(:players) { [:a, :b] }
-  let(:game) { RubyRacer.new(players, die) }
 
-  context 'game play' do
+  context 'game play with 2 players' do
+
+    let(:die) { Die.new }
+    let(:players) { [:a, :b] }
+    let(:game) { RubyRacer.new(players, die) }
 
     it 'finishes the game if a player passes the finish line' do
       game.player_one_location = 29
@@ -31,14 +32,10 @@ describe RubyRacer do
       expect(game.player_one_location).to be > 20
     end
 
+  it 'displays a board with two rows' do
+    expect(game.board_visualization.length).to eq 2
   end
 
-  context 'board_visualization' do
-
-    it 'displays a board with a row for each player' do
-      expect(game.board_visualization.length).to eq players.length
-    end
-
-  end
+end
 
 end
