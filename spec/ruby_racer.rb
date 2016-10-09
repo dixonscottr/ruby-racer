@@ -3,39 +3,33 @@ require_relative '../die'
 
 describe RubyRacer do
 
-  context 'game play with 2 players' do
-
     let(:die) { Die.new }
-    let(:players) { [:a, :b] }
-    let(:game) { RubyRacer.new(players, die) }
+    let(:num_of_players) { 4 }
+    let(:game) { RubyRacer.new(num_of_players, die, 30) }
 
     it 'finishes the game if a player passes the finish line' do
-      game.player_one_location = 29
+      game.player_locations = {:a => 9, :b => 29, :c => 29, :d => 15}
       expect(game.finished?).to eq true
     end
 
     it 'determines a winner' do
-      game.player_one_location = 25
-      game.player_two_location = 29
-      expect(game.winner).to eq players[1]
+      game.player_locations = {:a => 9, :b => 20, :c => 29, :d => 15}
+      expect(game.winner).to eq :c
     end
 
     it 'calls the game a tie if both players cross the finish line in the same turn' do
-      game.player_one_location = 29
-      game.player_two_location = 29
+      game.player_locations = {:a => 9, :b => 29, :c => 29, :d => 15}
       expect(game.winner).to eq nil
     end
 
     it 'moves the player forward according to the die roll' do
-      game.player_one_location = 20
-      game.advance_player(players[0])
-      expect(game.player_one_location).to be > 20
+      game.player_locations = {:a => 9, :b => 20, :c => 29, :d => 15}
+      game.advance_players
+      expect(game.player_locations.values[0]).to be > 9
     end
 
-  it 'displays a board with two rows' do
-    expect(game.board_visualization.length).to eq 2
-  end
-
-end
+    it 'displays a board for each player' do
+      expect(game.board_visualization.length).to eq num_of_players
+    end
 
 end
