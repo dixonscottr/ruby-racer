@@ -32,4 +32,9 @@ describe RubyRacer do
       expect(game.board_visualization.length).to eq num_of_players
     end
 
+    it 'lets players choose their own symbols and sets the location to 0' do
+      game.record_player_symbols([:a, :b, :q, :p])
+      expect(game.player_locations).to eq ({:a => 0, :b => 0, :q => 0, :p => 0})
+    end
+
 end
